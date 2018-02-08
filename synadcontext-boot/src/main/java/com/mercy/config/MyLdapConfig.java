@@ -5,7 +5,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 
 @Configuration
-public class IndexConfig extends WebMvcConfigurerAdapter {
+public class MyLdapConfig extends WebMvcConfigurerAdapter {
 
+
+        
 
 }

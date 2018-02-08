@@ -39,3 +39,11 @@ spring:
 #    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 #    # 合并多个DruidDataSource的监控数据
 #    #useGlobalDataSourceStat=true
+
+myldap:
+  url: ldap://192.168.100.3:389
+  adminName: sysuser
+  adminPassword: Unlcn@2018
+
+
+
