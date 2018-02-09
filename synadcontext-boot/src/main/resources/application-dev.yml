@@ -41,8 +41,8 @@ spring:
 #    #useGlobalDataSourceStat=true
 
 myldap:
-  url: ldap://192.168.100.3:389
-  adminName: sysuser
+  url: ldap://10.20.30.138:389
+  adminName: sysuser@adtest.com
   adminPassword: Unlcn@2018
 
 

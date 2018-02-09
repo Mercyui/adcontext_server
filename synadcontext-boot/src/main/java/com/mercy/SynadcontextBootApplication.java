@@ -1,4 +1,4 @@
-package com.example.synadcontextboot;
+package com.mercy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SynadcontextBootApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SynadcontextBootApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SynadcontextBootApplication.class, args);
+    }
 }
