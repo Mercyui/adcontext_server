@@ -16,7 +16,9 @@ import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 
 @Service
 public class CoreServiceImpl implements CoreService {
@@ -44,39 +46,46 @@ public class CoreServiceImpl implements CoreService {
         //连接超时设置为3秒
         initTable.put("com.sun.jndi.ldap.connect.timeout", "3000");
         try {
-
             //建立连接
             LdapContext ldapContext = new InitialLdapContext(initTable, null);
             //创建索引及定制返回属性
             SearchControls searchCtls = new SearchControls(); //Create the search controls
             searchCtls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+            //String dn="";
             String searchFilter = "objectClass=User";
             //搜索域节点
-            String searchBase = "DC=adtest,DC=com";
+            String searchBase = "OU=中联中国,OU=Activity Users,DC=adtest,DC=com";
             //String returnedAtts[] = {"memberOf"};//定制返回属性
             String reAttrs[] = {"distinguishedName", "LastLogon", "LastLogoff", "name", "sAMAccountName",
                     "displayName", "pwdLastSet", "userAccountControl", "userPrincipalName", "whenChanged",
                     "whenCreated"};
             searchCtls.setReturningAttributes(reAttrs);
             NamingEnumeration<SearchResult> enumeration = ldapContext.search(searchBase, searchFilter, searchCtls);
-
-            while (enumeration.hasMoreElements()) {
+            while (enumeration != null && enumeration.hasMoreElements()) {
+                //map 转换存储用户信息
+                Map<String, Object> userMap = new HashMap<>();
                 SearchResult next = enumeration.next();
                 Attributes attributes = next.getAttributes();
                 if (attributes != null) {
                     NamingEnumeration<? extends Attribute> all = attributes.getAll();
+                    NamingEnumeration<String> iDs = attributes.getIDs();
                     while (all.hasMoreElements()) {
                         Attribute attribute = all.next();
-                        NamingEnumeration<?> attributeAll = attribute.getAll();
-                        if (attributeAll != null) {
-                            while (attributeAll.hasMoreElements()) {
-                                Object element = attributeAll.nextElement();
-                                String string = element.toString();
-                            }
-                        }
+                        String id = attribute.getID();
+                        Object o = attribute.get();
+                        //NamingEnumeration<?> attributeAll = attribute.getAll();
+                        //if (attributeAll != null) {
+                        //    while (attributeAll.hasMoreElements()) {
+                        //        Object element = attributeAll.nextElement();
+                        //        String string = element.toString();
+                        //
+                        //
+                        //    }
+                        //}
                     }
                 }
             }
+
         } catch (NamingException e) {
             throw new MyOwnerException("链接ad域异常");
         }
