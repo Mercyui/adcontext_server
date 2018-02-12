@@ -32,4 +32,25 @@
 
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <configuration>
+                    <configurationFile>${basedir}/src/main/resources/mybatis/generatorConfig.xml</configurationFile>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.mercy</groupId>
+                        <artifactId>mybatis-plugin</artifactId>
+                        <version>1.0.0</version>
+                        <!--<scope>system</scope>-->
+                        <!--<systemPath>${project.basedir}/lib/mybatis-page-plugin-1.0-SNAPSHOT.jar</systemPath>-->
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

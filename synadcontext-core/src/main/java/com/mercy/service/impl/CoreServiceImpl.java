@@ -73,6 +73,8 @@ public class CoreServiceImpl implements CoreService {
                         Attribute attribute = all.next();
                         String id = attribute.getID();
                         Object o = attribute.get();
+
+
                         //NamingEnumeration<?> attributeAll = attribute.getAll();
                         //if (attributeAll != null) {
                         //    while (attributeAll.hasMoreElements()) {

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="base-service" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$"/>
+        </plugin>
+        <plugin type="org.duoku.groom.mybatis.plugin.PaginationPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/synadcontext"
+                        userId="root" password="123"/>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.mercy.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.mercy.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--<table tableName="sys_gate_config" >-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+
+        <!--出库离场登记记录表-->
+        <!--<table tableName="wms_departure_register" >-->
+            <!--<generatedKey column="dr_id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+
+        <!--  入库
+        <table tableName="wms_inbound_order" >
+            <generatedKey column="od_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inbound_order_detail" >
+            <generatedKey column="odd_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inbound_check" >
+            <generatedKey column="ck_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inbound_allocation" >
+            <generatedKey column="al_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inbound_repair" >
+            <generatedKey column="rp_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inbound_task" >
+            <generatedKey column="tsk_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inbound_ploy" >
+            <generatedKey column="py_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inbound_ploy_condition" >
+            <generatedKey column="pyc_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inbound_ploy_flowto" >
+            <generatedKey column="pyf_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inbound_ploy_gencondition" >
+            <generatedKey column="pygrc_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inbound_ploy_genresult" >
+            <generatedKey column="pygrr_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inbound_ploy_location" >
+            <generatedKey column="pyl_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inbound_ploy_operator" >
+            <generatedKey column="pyo_id" sqlStatement="MySql" identity="true" />
+        </table>
+        入库-->
+
+        <!-- 入库验车
+         <table tableName="tms_damage_pickup" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_inbound_inspect" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_fetch_bill_log" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        &lt;!&ndash;<table tableName="tms_inspect_bill" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>&ndash;&gt;
+        <table tableName="tms_inspect_cancel_log" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_inspect_excp" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_inspect_excp_attachs" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_inspect_excp_constant" >
+            <generatedKey column="code" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_inspect_log" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_inspect_component_constant" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_inspect_component_miss" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>-->
+
+
+        <!-- 在库
+        <table tableName="wms_inventory" >
+            <generatedKey column="inv_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_inventory_location" >
+            <generatedKey column="invloc_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_location" >
+            <generatedKey column="loc_id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="wms_warehouse" >
+            <generatedKey column="wh_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_zone" >
+            <generatedKey column="ze_id" sqlStatement="MySql" identity="true" />
+        </table>
+        在库 -->
+
+        <!--<table tableName="wms_warehouse" >-->
+            <!--<generatedKey column="wh_id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+
+        <!--出库
+        <table tableName="wms_outbound_bl" >
+            <generatedKey column="bl_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+        <table tableName="wms_outbound_order" >
+            <generatedKey column="ood_id" sqlStatement="MySql" identity="true" />
+        </table>-->
+
+        <!--<table tableName="wms_warehouse_user" >-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+
+        <!--<table tableName="wms_outbound_order" >
+            <generatedKey column="ood_id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_inspect_repair_time" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_pickup_bill" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_pickup_cancel_log" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_pickup_cancel_reason" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_pickup_confirm_log" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_pickup_damage_attach" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>-->
+
+        <!--出库验车-->
+        <!--<table tableName="wms_asn_temp" >
+            <generatedKey column="at_id" sqlStatement="MySql" identity="true" />
+        </table>-->
+        <!--<table tableName="tms_outbound_inspect_log" >
+            <generatedKey column="bl_id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_outbound_inspect_excp" >
+            <generatedKey column="bl_id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_outbound_excp_attachs" >
+            <generatedKey column="bl_id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="tms_outbound_component_miss" >
+            <generatedKey column="bl_id" sqlStatement="MySql" identity="true" />
+        </table>-->
+
+        <!--<table tableName="tms_inspect_excp" >-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table tableName="tms_inspect_repair_time" >-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table tableName="tms_pickup_bill" >-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table tableName="tms_pickup_cancel_log" >-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table tableName="tms_pickup_cancel_reason" >-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table tableName="tms_pickup_confirm_log" >-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!--<table tableName="tms_inbound_inspect">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>-->
+        <!--<table tableName="wms_preparation_plan">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="wms_preparation_vehicle_detail">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>-->
+        <!--<table tableName="tms_inspect_component_miss">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>-->
+
+        <!--<table tableName="wms_preparation_plan" >
+            <generatedKey column="pp_id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="wms_preparation_vehicle_detail" >
+            <generatedKey column="vd_id" sqlStatement="MySql" identity="true" />
+        </table>-->
+        <!--<table tableName="tms_inbound_attachs">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="tms_inbound">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>-->
+
+        <!--<table tableName="wms_dealer_car_back" >-->
+        <!--<generatedKey column="cb_id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+        <!---->
+        <!--<table tableName="sys_user" >-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+
+        <!--<table tableName="sys_role" >-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+
+        <!--君马库接口表-->
+
+        <!--<table tableName="wms_dealer_back_excp" >-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->
+        <!--</table>-->
+
+
+    </context>
+</generatorConfiguration>
