@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mercy.mapper.AdUserinfoInterfaceMapper">
+  <resultMap id="BaseResultMap" type="com.mercy.model.AdUserinfoInterface">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="orgnise_id" jdbcType="BIGINT" property="orgniseId" />
+    <result column="display_name" jdbcType="VARCHAR" property="displayName" />
+    <result column="user_principalname" jdbcType="VARCHAR" property="userPrincipalname" />
+    <result column="last_logon" jdbcType="VARCHAR" property="lastLogon" />
+    <result column="last_logon_off" jdbcType="VARCHAR" property="lastLogonOff" />
+    <result column="sam_account_name" jdbcType="VARCHAR" property="samAccountName" />
+    <result column="pwd_last_set" jdbcType="VARCHAR" property="pwdLastSet" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate" />
+    <result column="time_stamp" jdbcType="VARCHAR" property="timeStamp" />
+    <result column="modify_type" jdbcType="VARCHAR" property="modifyType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, username, orgnise_id, display_name, user_principalname, last_logon, last_logon_off, 
+    sam_account_name, pwd_last_set, gmt_create, gmt_update, time_stamp, modify_type
+  </sql>
+  <select id="selectByExample" parameterType="com.mercy.model.AdUserinfoInterfaceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ad_userinfo_interface
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>-1">
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.mercy.model.AdUserinfoInterfaceExample">
+    delete from ad_userinfo_interface
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mercy.model.AdUserinfoInterface">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ad_userinfo_interface (username, orgnise_id, display_name, 
+      user_principalname, last_logon, last_logon_off, 
+      sam_account_name, pwd_last_set, gmt_create, 
+      gmt_update, time_stamp, modify_type
+      )
+    values (#{username,jdbcType=VARCHAR}, #{orgniseId,jdbcType=BIGINT}, #{displayName,jdbcType=VARCHAR}, 
+      #{userPrincipalname,jdbcType=VARCHAR}, #{lastLogon,jdbcType=VARCHAR}, #{lastLogonOff,jdbcType=VARCHAR}, 
+      #{samAccountName,jdbcType=VARCHAR}, #{pwdLastSet,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtUpdate,jdbcType=TIMESTAMP}, #{timeStamp,jdbcType=VARCHAR}, #{modifyType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mercy.model.AdUserinfoInterface">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ad_userinfo_interface
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        username,
+      </if>
+      <if test="orgniseId != null">
+        orgnise_id,
+      </if>
+      <if test="displayName != null">
+        display_name,
+      </if>
+      <if test="userPrincipalname != null">
+        user_principalname,
+      </if>
+      <if test="lastLogon != null">
+        last_logon,
+      </if>
+      <if test="lastLogonOff != null">
+        last_logon_off,
+      </if>
+      <if test="samAccountName != null">
+        sam_account_name,
+      </if>
+      <if test="pwdLastSet != null">
+        pwd_last_set,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtUpdate != null">
+        gmt_update,
+      </if>
+      <if test="timeStamp != null">
+        time_stamp,
+      </if>
+      <if test="modifyType != null">
+        modify_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="orgniseId != null">
+        #{orgniseId,jdbcType=BIGINT},
+      </if>
+      <if test="displayName != null">
+        #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPrincipalname != null">
+        #{userPrincipalname,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogon != null">
+        #{lastLogon,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogonOff != null">
+        #{lastLogonOff,jdbcType=VARCHAR},
+      </if>
+      <if test="samAccountName != null">
+        #{samAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdLastSet != null">
+        #{pwdLastSet,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtUpdate != null">
+        #{gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeStamp != null">
+        #{timeStamp,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyType != null">
+        #{modifyType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mercy.model.AdUserinfoInterfaceExample" resultType="java.lang.Long">
+    select count(*) from ad_userinfo_interface
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ad_userinfo_interface
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgniseId != null">
+        orgnise_id = #{record.orgniseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.displayName != null">
+        display_name = #{record.displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPrincipalname != null">
+        user_principalname = #{record.userPrincipalname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLogon != null">
+        last_logon = #{record.lastLogon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLogonOff != null">
+        last_logon_off = #{record.lastLogonOff,jdbcType=VARCHAR},
+      </if>
+      <if test="record.samAccountName != null">
+        sam_account_name = #{record.samAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pwdLastSet != null">
+        pwd_last_set = #{record.pwdLastSet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gmtCreate != null">
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtUpdate != null">
+        gmt_update = #{record.gmtUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.timeStamp != null">
+        time_stamp = #{record.timeStamp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyType != null">
+        modify_type = #{record.modifyType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ad_userinfo_interface
+    set id = #{record.id,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      orgnise_id = #{record.orgniseId,jdbcType=BIGINT},
+      display_name = #{record.displayName,jdbcType=VARCHAR},
+      user_principalname = #{record.userPrincipalname,jdbcType=VARCHAR},
+      last_logon = #{record.lastLogon,jdbcType=VARCHAR},
+      last_logon_off = #{record.lastLogonOff,jdbcType=VARCHAR},
+      sam_account_name = #{record.samAccountName,jdbcType=VARCHAR},
+      pwd_last_set = #{record.pwdLastSet,jdbcType=VARCHAR},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_update = #{record.gmtUpdate,jdbcType=TIMESTAMP},
+      time_stamp = #{record.timeStamp,jdbcType=VARCHAR},
+      modify_type = #{record.modifyType,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
