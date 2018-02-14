@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mercy.mapper.AdUserinfoInterfaceMapper">
-  <resultMap id="BaseResultMap" type="com.mercy.model.AdUserinfoInterface">
+<mapper namespace="com.mercy.mapper.adcontext.AdUserinfoMapper">
+  <resultMap id="BaseResultMap" type="com.mercy.model.adcontext.AdUserinfo">
     <result column="id" jdbcType="BIGINT" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="orgnise_id" jdbcType="BIGINT" property="orgniseId" />
@@ -13,8 +13,7 @@
     <result column="pwd_last_set" jdbcType="VARCHAR" property="pwdLastSet" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate" />
-    <result column="time_stamp" jdbcType="VARCHAR" property="timeStamp" />
-    <result column="modify_type" jdbcType="VARCHAR" property="modifyType" />
+    <result column="user_status" jdbcType="VARCHAR" property="userStatus" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,15 +75,15 @@
   </sql>
   <sql id="Base_Column_List">
     id, username, orgnise_id, display_name, user_principalname, last_logon, last_logon_off, 
-    sam_account_name, pwd_last_set, gmt_create, gmt_update, time_stamp, modify_type
+    sam_account_name, pwd_last_set, gmt_create, gmt_update, user_status
   </sql>
-  <select id="selectByExample" parameterType="com.mercy.model.AdUserinfoInterfaceExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.mercy.model.adcontext.AdUserinfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from ad_userinfo_interface
+    from ad_userinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -95,32 +94,30 @@
       limit ${limitStart} , ${limitEnd}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.mercy.model.AdUserinfoInterfaceExample">
-    delete from ad_userinfo_interface
+  <delete id="deleteByExample" parameterType="com.mercy.model.adcontext.AdUserinfoExample">
+    delete from ad_userinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.mercy.model.AdUserinfoInterface">
+  <insert id="insert" parameterType="com.mercy.model.adcontext.AdUserinfo">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ad_userinfo_interface (username, orgnise_id, display_name, 
+    insert into ad_userinfo (username, orgnise_id, display_name, 
       user_principalname, last_logon, last_logon_off, 
       sam_account_name, pwd_last_set, gmt_create, 
-      gmt_update, time_stamp, modify_type
-      )
+      gmt_update, user_status)
     values (#{username,jdbcType=VARCHAR}, #{orgniseId,jdbcType=BIGINT}, #{displayName,jdbcType=VARCHAR}, 
       #{userPrincipalname,jdbcType=VARCHAR}, #{lastLogon,jdbcType=VARCHAR}, #{lastLogonOff,jdbcType=VARCHAR}, 
       #{samAccountName,jdbcType=VARCHAR}, #{pwdLastSet,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtUpdate,jdbcType=TIMESTAMP}, #{timeStamp,jdbcType=VARCHAR}, #{modifyType,jdbcType=VARCHAR}
-      )
+      #{gmtUpdate,jdbcType=TIMESTAMP}, #{userStatus,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.mercy.model.AdUserinfoInterface">
+  <insert id="insertSelective" parameterType="com.mercy.model.adcontext.AdUserinfo">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ad_userinfo_interface
+    insert into ad_userinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="username != null">
         username,
@@ -152,11 +149,8 @@
       <if test="gmtUpdate != null">
         gmt_update,
       </if>
-      <if test="timeStamp != null">
-        time_stamp,
-      </if>
-      <if test="modifyType != null">
-        modify_type,
+      <if test="userStatus != null">
+        user_status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -190,22 +184,19 @@
       <if test="gmtUpdate != null">
         #{gmtUpdate,jdbcType=TIMESTAMP},
       </if>
-      <if test="timeStamp != null">
-        #{timeStamp,jdbcType=VARCHAR},
-      </if>
-      <if test="modifyType != null">
-        #{modifyType,jdbcType=VARCHAR},
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mercy.model.AdUserinfoInterfaceExample" resultType="java.lang.Long">
-    select count(*) from ad_userinfo_interface
+  <select id="countByExample" parameterType="com.mercy.model.adcontext.AdUserinfoExample" resultType="java.lang.Long">
+    select count(*) from ad_userinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update ad_userinfo_interface
+    update ad_userinfo
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
@@ -240,11 +231,8 @@
       <if test="record.gmtUpdate != null">
         gmt_update = #{record.gmtUpdate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.timeStamp != null">
-        time_stamp = #{record.timeStamp,jdbcType=VARCHAR},
-      </if>
-      <if test="record.modifyType != null">
-        modify_type = #{record.modifyType,jdbcType=VARCHAR},
+      <if test="record.userStatus != null">
+        user_status = #{record.userStatus,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -252,7 +240,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update ad_userinfo_interface
+    update ad_userinfo
     set id = #{record.id,jdbcType=BIGINT},
       username = #{record.username,jdbcType=VARCHAR},
       orgnise_id = #{record.orgniseId,jdbcType=BIGINT},
@@ -264,8 +252,7 @@
       pwd_last_set = #{record.pwdLastSet,jdbcType=VARCHAR},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_update = #{record.gmtUpdate,jdbcType=TIMESTAMP},
-      time_stamp = #{record.timeStamp,jdbcType=VARCHAR},
-      modify_type = #{record.modifyType,jdbcType=VARCHAR}
+      user_status = #{record.userStatus,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

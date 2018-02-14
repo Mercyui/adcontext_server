@@ -1,7 +1,7 @@
 package com.mercy.service.impl;
 
 import com.mercy.excption.MyOwnerException;
-import com.mercy.service.CoreService;
+import com.mercy.service.AdcontextCoreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 @Service
-public class CoreServiceImpl implements CoreService {
+public class CoreServiceImpl implements AdcontextCoreService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Value("${myldap.url}")

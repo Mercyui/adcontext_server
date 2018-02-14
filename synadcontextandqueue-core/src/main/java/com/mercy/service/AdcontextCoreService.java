@@ -1,5 +1,5 @@
 package com.mercy.service;
 
-public interface CoreService {
+public interface AdcontextCoreService {
     void getContextInfo() throws Exception;
 }

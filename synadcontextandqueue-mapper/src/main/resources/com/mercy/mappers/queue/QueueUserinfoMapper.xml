@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mercy.mapper.AdUserinfoMapper">
-  <resultMap id="BaseResultMap" type="com.mercy.model.AdUserinfo">
+<mapper namespace="com.mercy.mapper.queue.QueueUserinfoMapper">
+  <resultMap id="BaseResultMap" type="com.mercy.model.queue.QueueUserinfo">
     <result column="id" jdbcType="BIGINT" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="orgnise_id" jdbcType="BIGINT" property="orgniseId" />
-    <result column="display_name" jdbcType="VARCHAR" property="displayName" />
-    <result column="user_principalname" jdbcType="VARCHAR" property="userPrincipalname" />
-    <result column="last_logon" jdbcType="VARCHAR" property="lastLogon" />
-    <result column="last_logon_off" jdbcType="VARCHAR" property="lastLogonOff" />
-    <result column="sam_account_name" jdbcType="VARCHAR" property="samAccountName" />
-    <result column="pwd_last_set" jdbcType="VARCHAR" property="pwdLastSet" />
+    <result column="order_no" jdbcType="BIGINT" property="orderNo" />
+    <result column="contact_mobile" jdbcType="VARCHAR" property="contactMobile" />
+    <result column="sort_score" jdbcType="INTEGER" property="sortScore" />
+    <result column="current_sort" jdbcType="VARCHAR" property="currentSort" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate" />
     <result column="user_status" jdbcType="VARCHAR" property="userStatus" />
@@ -74,16 +71,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, orgnise_id, display_name, user_principalname, last_logon, last_logon_off, 
-    sam_account_name, pwd_last_set, gmt_create, gmt_update, user_status
+    id, username, order_no, contact_mobile, sort_score, current_sort, gmt_create, gmt_update, 
+    user_status
   </sql>
-  <select id="selectByExample" parameterType="com.mercy.model.AdUserinfoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.mercy.model.queue.QueueUserinfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from ad_userinfo
+    from queue_userinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,54 +91,43 @@
       limit ${limitStart} , ${limitEnd}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.mercy.model.AdUserinfoExample">
-    delete from ad_userinfo
+  <delete id="deleteByExample" parameterType="com.mercy.model.queue.QueueUserinfoExample">
+    delete from queue_userinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.mercy.model.AdUserinfo">
+  <insert id="insert" parameterType="com.mercy.model.queue.QueueUserinfo">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ad_userinfo (username, orgnise_id, display_name, 
-      user_principalname, last_logon, last_logon_off, 
-      sam_account_name, pwd_last_set, gmt_create, 
+    insert into queue_userinfo (username, order_no, contact_mobile, 
+      sort_score, current_sort, gmt_create, 
       gmt_update, user_status)
-    values (#{username,jdbcType=VARCHAR}, #{orgniseId,jdbcType=BIGINT}, #{displayName,jdbcType=VARCHAR}, 
-      #{userPrincipalname,jdbcType=VARCHAR}, #{lastLogon,jdbcType=VARCHAR}, #{lastLogonOff,jdbcType=VARCHAR}, 
-      #{samAccountName,jdbcType=VARCHAR}, #{pwdLastSet,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+    values (#{username,jdbcType=VARCHAR}, #{orderNo,jdbcType=BIGINT}, #{contactMobile,jdbcType=VARCHAR}, 
+      #{sortScore,jdbcType=INTEGER}, #{currentSort,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
       #{gmtUpdate,jdbcType=TIMESTAMP}, #{userStatus,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.mercy.model.AdUserinfo">
+  <insert id="insertSelective" parameterType="com.mercy.model.queue.QueueUserinfo">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ad_userinfo
+    insert into queue_userinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="username != null">
         username,
       </if>
-      <if test="orgniseId != null">
-        orgnise_id,
+      <if test="orderNo != null">
+        order_no,
       </if>
-      <if test="displayName != null">
-        display_name,
+      <if test="contactMobile != null">
+        contact_mobile,
       </if>
-      <if test="userPrincipalname != null">
-        user_principalname,
+      <if test="sortScore != null">
+        sort_score,
       </if>
-      <if test="lastLogon != null">
-        last_logon,
-      </if>
-      <if test="lastLogonOff != null">
-        last_logon_off,
-      </if>
-      <if test="samAccountName != null">
-        sam_account_name,
-      </if>
-      <if test="pwdLastSet != null">
-        pwd_last_set,
+      <if test="currentSort != null">
+        current_sort,
       </if>
       <if test="gmtCreate != null">
         gmt_create,
@@ -157,26 +143,17 @@
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>
-      <if test="orgniseId != null">
-        #{orgniseId,jdbcType=BIGINT},
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=BIGINT},
       </if>
-      <if test="displayName != null">
-        #{displayName,jdbcType=VARCHAR},
+      <if test="contactMobile != null">
+        #{contactMobile,jdbcType=VARCHAR},
       </if>
-      <if test="userPrincipalname != null">
-        #{userPrincipalname,jdbcType=VARCHAR},
+      <if test="sortScore != null">
+        #{sortScore,jdbcType=INTEGER},
       </if>
-      <if test="lastLogon != null">
-        #{lastLogon,jdbcType=VARCHAR},
-      </if>
-      <if test="lastLogonOff != null">
-        #{lastLogonOff,jdbcType=VARCHAR},
-      </if>
-      <if test="samAccountName != null">
-        #{samAccountName,jdbcType=VARCHAR},
-      </if>
-      <if test="pwdLastSet != null">
-        #{pwdLastSet,jdbcType=VARCHAR},
+      <if test="currentSort != null">
+        #{currentSort,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -189,14 +166,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mercy.model.AdUserinfoExample" resultType="java.lang.Long">
-    select count(*) from ad_userinfo
+  <select id="countByExample" parameterType="com.mercy.model.queue.QueueUserinfoExample" resultType="java.lang.Long">
+    select count(*) from queue_userinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update ad_userinfo
+    update queue_userinfo
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
@@ -204,26 +181,17 @@
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.orgniseId != null">
-        orgnise_id = #{record.orgniseId,jdbcType=BIGINT},
+      <if test="record.orderNo != null">
+        order_no = #{record.orderNo,jdbcType=BIGINT},
       </if>
-      <if test="record.displayName != null">
-        display_name = #{record.displayName,jdbcType=VARCHAR},
+      <if test="record.contactMobile != null">
+        contact_mobile = #{record.contactMobile,jdbcType=VARCHAR},
       </if>
-      <if test="record.userPrincipalname != null">
-        user_principalname = #{record.userPrincipalname,jdbcType=VARCHAR},
+      <if test="record.sortScore != null">
+        sort_score = #{record.sortScore,jdbcType=INTEGER},
       </if>
-      <if test="record.lastLogon != null">
-        last_logon = #{record.lastLogon,jdbcType=VARCHAR},
-      </if>
-      <if test="record.lastLogonOff != null">
-        last_logon_off = #{record.lastLogonOff,jdbcType=VARCHAR},
-      </if>
-      <if test="record.samAccountName != null">
-        sam_account_name = #{record.samAccountName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pwdLastSet != null">
-        pwd_last_set = #{record.pwdLastSet,jdbcType=VARCHAR},
+      <if test="record.currentSort != null">
+        current_sort = #{record.currentSort,jdbcType=VARCHAR},
       </if>
       <if test="record.gmtCreate != null">
         gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
@@ -240,16 +208,13 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update ad_userinfo
+    update queue_userinfo
     set id = #{record.id,jdbcType=BIGINT},
       username = #{record.username,jdbcType=VARCHAR},
-      orgnise_id = #{record.orgniseId,jdbcType=BIGINT},
-      display_name = #{record.displayName,jdbcType=VARCHAR},
-      user_principalname = #{record.userPrincipalname,jdbcType=VARCHAR},
-      last_logon = #{record.lastLogon,jdbcType=VARCHAR},
-      last_logon_off = #{record.lastLogonOff,jdbcType=VARCHAR},
-      sam_account_name = #{record.samAccountName,jdbcType=VARCHAR},
-      pwd_last_set = #{record.pwdLastSet,jdbcType=VARCHAR},
+      order_no = #{record.orderNo,jdbcType=BIGINT},
+      contact_mobile = #{record.contactMobile,jdbcType=VARCHAR},
+      sort_score = #{record.sortScore,jdbcType=INTEGER},
+      current_sort = #{record.currentSort,jdbcType=VARCHAR},
       gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
       gmt_update = #{record.gmtUpdate,jdbcType=TIMESTAMP},
       user_status = #{record.userStatus,jdbcType=VARCHAR}

@@ -1,4 +1,4 @@
-package com.mercy.model;
+package com.mercy.model.adcontext;
 
 import java.util.ArrayList;
 import java.util.Date;

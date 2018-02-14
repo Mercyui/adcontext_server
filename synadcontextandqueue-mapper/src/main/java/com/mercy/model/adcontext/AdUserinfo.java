@@ -1,9 +1,9 @@
-package com.mercy.model;
+package com.mercy.model.adcontext;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class AdUserinfoInterface implements Serializable {
+public class AdUserinfo implements Serializable {
     private Long id;
 
     private String username;
@@ -26,9 +26,7 @@ public class AdUserinfoInterface implements Serializable {
 
     private Date gmtUpdate;
 
-    private String timeStamp;
-
-    private String modifyType;
+    private String userStatus;
 
     private static final long serialVersionUID = 1L;
 
@@ -120,20 +118,12 @@ public class AdUserinfoInterface implements Serializable {
         this.gmtUpdate = gmtUpdate;
     }
 
-    public String getTimeStamp() {
-        return timeStamp;
+    public String getUserStatus() {
+        return userStatus;
     }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp == null ? null : timeStamp.trim();
-    }
-
-    public String getModifyType() {
-        return modifyType;
-    }
-
-    public void setModifyType(String modifyType) {
-        this.modifyType = modifyType == null ? null : modifyType.trim();
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus == null ? null : userStatus.trim();
     }
 
     @Override
@@ -153,8 +143,7 @@ public class AdUserinfoInterface implements Serializable {
         sb.append(", pwdLastSet=").append(pwdLastSet);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtUpdate=").append(gmtUpdate);
-        sb.append(", timeStamp=").append(timeStamp);
-        sb.append(", modifyType=").append(modifyType);
+        sb.append(", userStatus=").append(userStatus);
         sb.append("]");
         return sb.toString();
     }

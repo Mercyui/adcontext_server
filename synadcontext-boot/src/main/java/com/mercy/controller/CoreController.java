@@ -2,7 +2,7 @@ package com.mercy.controller;
 
 import com.mercy.config.MyLdapConfig;
 import com.mercy.excption.MyOwnerException;
-import com.mercy.service.CoreService;
+import com.mercy.service.AdcontextCoreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CoreController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private CoreService coreService;
+    private AdcontextCoreService coreService;
 
     private MyLdapConfig myLdapConfig;
 
@@ -27,7 +27,7 @@ public class CoreController {
     }
 
     @Autowired
-    public void setCoreService(CoreService coreService) {
+    public void setCoreService(AdcontextCoreService coreService) {
         this.coreService = coreService;
     }
 

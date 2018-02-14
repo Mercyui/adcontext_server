@@ -1,7 +1,7 @@
-package com.mercy.mapper;
+package com.mercy.mapper.adcontext;
 
-import com.mercy.model.AdUserinfoInterface;
-import com.mercy.model.AdUserinfoInterfaceExample;
+import com.mercy.model.adcontext.AdUserinfoInterface;
+import com.mercy.model.adcontext.AdUserinfoInterfaceExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
