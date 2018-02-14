@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.mercy</groupId>
-            <artifactId>synadcontext-core</artifactId>
+            <artifactId>synadcontextandqueue-core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 

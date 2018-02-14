@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>synadcontext-core</artifactId>
+    <artifactId>synadcontextandqueue-core</artifactId>
     <packaging>jar</packaging>
     <name>synadcontext-core</name>
     <description>业务逻辑处理</description>
@@ -25,7 +25,7 @@
 
         <dependency>
             <groupId>com.mercy</groupId>
-            <artifactId>synadcontext-mapper</artifactId>
+            <artifactId>synadcontextandqueue-mapper</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <!--<dependency>-->

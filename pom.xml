@@ -19,8 +19,9 @@
 
     <modules>
         <module>synadcontext-boot</module>
-        <module>synadcontext-core</module>
-        <module>synadcontext-mapper</module>
+        <module>queue-boot</module>
+        <module>synadcontextandqueue-core</module>
+        <module>synadcontextandqueue-mapper</module>
     </modules>
 
     <properties>
