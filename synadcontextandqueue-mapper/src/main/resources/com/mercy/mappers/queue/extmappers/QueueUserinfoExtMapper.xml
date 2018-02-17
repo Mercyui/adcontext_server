@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mercy.mapper.queue.extmapper.QueueUserinfoExtMapper">
+    <resultMap id="BaseResultMap" type="com.mercy.model.queue.QueueUserinfo">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="order_no" jdbcType="BIGINT" property="orderNo"/>
+        <result column="contact_mobile" jdbcType="VARCHAR" property="contactMobile"/>
+        <result column="sort_score" jdbcType="INTEGER" property="sortScore"/>
+        <result column="current_sort" jdbcType="VARCHAR" property="currentSort"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate"/>
+        <result column="user_status" jdbcType="VARCHAR" property="userStatus"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+       id, username, order_no, contact_mobile, sort_score, current_sort, gmt_create, gmt_update,
+      user_status
+    </sql>
+
+    <!--查询队列的列表-->
+    <select id="selectQueueList" parameterType="map" resultMap="BaseResultMap">
+        select * from queue_userinfo a
+        where a.user_status =#{normal}
+        order by ${orderBy}
+        <if test="start !=null">
+            limit #{start},#{end}
+        </if>
+    </select>
+
+    <!--查询队列的数据条数-->
+    <select id="selectQueueListRecords" parameterType="map" resultType="java.lang.Integer">
+        select count(*) from queue_userinfo a
+        where a.user_status =#{normal}
+        order by ${orderBy}
+        <if test="start !=null">
+            limit #{start},#{end}
+        </if>
+    </select>
+
+</mapper>

@@ -1,7 +1,7 @@
-package com.mercy.service.impl;
+package com.mercy.service.adcontext.impl;
 
 import com.mercy.excption.MyOwnerException;
-import com.mercy.service.AdcontextCoreService;
+import com.mercy.service.adcontext.AdcontextCoreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
