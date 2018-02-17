@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/core")
-public class CoreController {
+public class AdcontextCoreController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private AdcontextCoreService coreService;
+    private AdcontextCoreService adcontextCoreService;
 
     private MyLdapConfig myLdapConfig;
 
@@ -27,8 +27,8 @@ public class CoreController {
     }
 
     @Autowired
-    public void setCoreService(AdcontextCoreService coreService) {
-        this.coreService = coreService;
+    public void setAdcontextCoreService(AdcontextCoreService adcontextCoreService) {
+        this.adcontextCoreService = adcontextCoreService;
     }
 
     @GetMapping(value = "/configuration")
@@ -42,7 +42,7 @@ public class CoreController {
     public void getContextInfo() {
         logger.info("CoreController.getContextInfo param:{}");
         try {
-            coreService.getContextInfo();
+            adcontextCoreService.getContextInfo();
         } catch (MyOwnerException e) {
             logger.error("CoreController.getContextInfo exception:", e);
             e.printStackTrace();

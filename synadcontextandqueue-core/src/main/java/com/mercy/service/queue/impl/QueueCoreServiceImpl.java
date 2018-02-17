@@ -5,7 +5,7 @@ import com.mercy.dto.Pagination;
 import com.mercy.dto.QueueListDTO;
 import com.mercy.enums.QueueUserInfoStatusEnum;
 import com.mercy.excption.MyOwnerException;
-import com.mercy.mapper.queue.extmapper.QueueUserinfoExtMapper;
+import com.mercy.extmapper.queue.QueueUserinfoExtMapper;
 import com.mercy.model.queue.QueueUserinfo;
 import com.mercy.service.queue.QueueCoreService;
 import org.slf4j.Logger;
@@ -35,12 +35,12 @@ public class QueueCoreServiceImpl implements QueueCoreService {
      * @param dto 参数封装
      */
     @Override
-    public HashMap<Object, Object> getQueueList(QueueListDTO dto) throws Exception {
+    public HashMap<String, Object> getQueueList(QueueListDTO dto) throws Exception {
         logger.info("QueueCoreServiceImpl.getQueueList params:{}", dto);
         if (Objects.isNull(dto))
             throw new MyOwnerException("传入的参数不能为空!");
         HashMap<String, Object> params = Maps.newHashMap();
-        params.put("normal", QueueUserInfoStatusEnum.STATUS_NORMAL);
+        params.put("normal", QueueUserInfoStatusEnum.STATUS_NORMAL.getCode());
         params.put("orderBy", "a.sort_score desc,a.gmt_update desc");
         params.put("start", dto.getStartIndex());
         params.put("end", dto.getPageSize());
@@ -53,13 +53,10 @@ public class QueueCoreServiceImpl implements QueueCoreService {
         pagination.setPageNo(dto.getPageNo());
         pagination.setPageSize(dto.getPageSize());
         pagination.setTotalRecord(count);
-        HashMap<Object, Object> result = Maps.newHashMap();
+        HashMap<String, Object> result = Maps.newHashMap();
         result.put("data", list);
         result.put("pagination", pagination);
         return result;
     }
-
-
-
 
 }

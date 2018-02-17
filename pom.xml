@@ -32,6 +32,7 @@
         <mysql.version>8.0.8-dmr</mysql.version>
         <druid.version>1.1.5</druid.version>
         <swagger.version>2.0.1</swagger.version>
+        <log4jdbc.version>1.2</log4jdbc.version>
     </properties>
 
     <dependencyManagement>
@@ -86,8 +87,11 @@
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
-
-
+            <dependency>
+                <groupId>com.googlecode.log4jdbc</groupId>
+                <artifactId>log4jdbc</artifactId>
+                <version>${log4jdbc.version}</version>
+            </dependency>
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>

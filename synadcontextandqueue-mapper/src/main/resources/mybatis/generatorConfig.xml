@@ -29,7 +29,7 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.mercy.mappers.adcontext" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="com.mercy.mapper.adcontext" targetProject="src/main/resources">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 

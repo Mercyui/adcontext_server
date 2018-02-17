@@ -21,7 +21,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 @Service
-public class CoreServiceImpl implements AdcontextCoreService {
+public class AdContextCoreServiceImpl implements AdcontextCoreService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Value("${myldap.url}")

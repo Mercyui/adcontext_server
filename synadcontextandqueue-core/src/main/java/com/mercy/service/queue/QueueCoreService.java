@@ -6,5 +6,5 @@ import java.util.HashMap;
 
 public interface QueueCoreService {
 
-    HashMap<Object, Object> getQueueList(QueueListDTO dto) throws Exception;
+    HashMap<String, Object> getQueueList(QueueListDTO dto) throws Exception;
 }
