@@ -24,26 +24,26 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.mercy.model.adcontext" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.mercy.model.queue" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.mercy.mapper.adcontext" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="com.mercy.mapper.queue" targetProject="src/main/resources">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.mercy.mapper.adcontext"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.mercy.mapper.queue"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="ad_userinfo">
+        <table tableName="queue_userinfo">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="ad_userinfo_interface">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table tableName="ad_userinfo_interface">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
         <!--出库离场登记记录表-->
         <!--<table tableName="wms_departure_register" >-->
         <!--<generatedKey column="dr_id" sqlStatement="MySql" identity="true" />-->

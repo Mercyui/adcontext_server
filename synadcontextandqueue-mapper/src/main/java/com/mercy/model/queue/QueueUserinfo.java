@@ -8,7 +8,7 @@ public class QueueUserinfo implements Serializable {
 
     private String username;
 
-    private Long orderNo;
+    private String orderNo;
 
     private String contactMobile;
 
@@ -40,12 +40,12 @@ public class QueueUserinfo implements Serializable {
         this.username = username == null ? null : username.trim();
     }
 
-    public Long getOrderNo() {
+    public String getOrderNo() {
         return orderNo;
     }
 
-    public void setOrderNo(Long orderNo) {
-        this.orderNo = orderNo;
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
     public String getContactMobile() {

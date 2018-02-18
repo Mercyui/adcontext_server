@@ -265,52 +265,62 @@ public class QueueUserinfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderNoEqualTo(Long value) {
+        public Criteria andOrderNoEqualTo(String value) {
             addCriterion("order_no =", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNoNotEqualTo(Long value) {
+        public Criteria andOrderNoNotEqualTo(String value) {
             addCriterion("order_no <>", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNoGreaterThan(Long value) {
+        public Criteria andOrderNoGreaterThan(String value) {
             addCriterion("order_no >", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNoGreaterThanOrEqualTo(Long value) {
+        public Criteria andOrderNoGreaterThanOrEqualTo(String value) {
             addCriterion("order_no >=", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNoLessThan(Long value) {
+        public Criteria andOrderNoLessThan(String value) {
             addCriterion("order_no <", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNoLessThanOrEqualTo(Long value) {
+        public Criteria andOrderNoLessThanOrEqualTo(String value) {
             addCriterion("order_no <=", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNoIn(List<Long> values) {
+        public Criteria andOrderNoLike(String value) {
+            addCriterion("order_no like", value, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoNotLike(String value) {
+            addCriterion("order_no not like", value, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoIn(List<String> values) {
             addCriterion("order_no in", values, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNoNotIn(List<Long> values) {
+        public Criteria andOrderNoNotIn(List<String> values) {
             addCriterion("order_no not in", values, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNoBetween(Long value1, Long value2) {
+        public Criteria andOrderNoBetween(String value1, String value2) {
             addCriterion("order_no between", value1, value2, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andOrderNoNotBetween(Long value1, Long value2) {
+        public Criteria andOrderNoNotBetween(String value1, String value2) {
             addCriterion("order_no not between", value1, value2, "orderNo");
             return (Criteria) this;
         }
@@ -707,6 +717,11 @@ public class QueueUserinfoExample {
 
         public Criteria andUsernameLikeInsensitive(String value) {
             addCriterion("upper(username) like", value.toUpperCase(), "username");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoLikeInsensitive(String value) {
+            addCriterion("upper(order_no) like", value.toUpperCase(), "orderNo");
             return (Criteria) this;
         }
 
