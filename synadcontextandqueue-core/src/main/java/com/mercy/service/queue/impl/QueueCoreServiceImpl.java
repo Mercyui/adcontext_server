@@ -52,7 +52,7 @@ public class QueueCoreServiceImpl implements QueueCoreService {
             throw new MyOwnerException("传入的参数不能为空!");
         HashMap<String, Object> params = Maps.newHashMap();
         params.put("normal", QueueUserInfoStatusEnum.STATUS_NORMAL.getCode());
-        params.put("orderBy", "a.current_sort desc,a.gmt_update desc");
+        params.put("orderBy", "a.current_sort ASC,a.gmt_update desc");
         params.put("start", dto.getStartIndex());
         params.put("end", dto.getPageSize());
         List<QueueUserinfo> list = queueUserinfoExtMapper.selectQueueList(params);
@@ -108,7 +108,7 @@ public class QueueCoreServiceImpl implements QueueCoreService {
         if (StringUtils.isBlank(dto.getUserId()))
             throw new MyOwnerException("传入的用户不能为空!");
         //先查询该用户目前的排名,如果已经是第一 就无需再进行移动
-        QueueUserinfo currentUser = queueUserinfoMapper.selectByPrimaryKey(Long.valueOf(dto.getUserId());
+        QueueUserinfo currentUser = queueUserinfoMapper.selectByPrimaryKey(Long.valueOf(dto.getUserId()));
         Integer currentSort = currentUser.getCurrentSort();
         if (currentSort == 1) {
             throw new MyOwnerException("该用户不能再向前移动");
@@ -129,4 +129,44 @@ public class QueueCoreServiceImpl implements QueueCoreService {
             queueUserinfoExtMapper.updateByPrimarykeyBatch(users);
         }
     }
+
+    /**
+     * 后移队列数据
+     *
+     * @param dto 参数封装
+     * @throws Exception 异常
+     */
+    @Override
+    public void moveDownQueueUser(QueueListDTO dto) throws Exception {
+        logger.info("QueueCoreServiceImpl.moveDownQueueUser params:{}", JSONObject.toJSONString(dto));
+        if (Objects.equals(dto, null))
+            throw new MyOwnerException("传入参数不能为空!");
+        if (StringUtils.isBlank(dto.getUserId()))
+            throw new MyOwnerException("传入的用户不能为空!");
+        //先查询该用户目前的排名,如果已经是最后 就无需再进行移动
+        QueueUserinfo currentUser = queueUserinfoMapper.selectByPrimaryKey(Long.valueOf(dto.getUserId()));
+        HashMap<String, Object> params = Maps.newHashMap();
+        params.put("normal", QueueUserInfoStatusEnum.STATUS_NORMAL.getCode());
+        int count = queueUserinfoExtMapper.selectQueueListRecords(params);
+        Integer currentSort = currentUser.getCurrentSort();
+        if (currentSort == count) {
+            throw new MyOwnerException("该用户不能再向后移动");
+        }
+        //用户排名向前移动一名,同时将移动前的后一位成员排名前移一位
+        QueueUserinfoExample example = new QueueUserinfoExample();
+        example.createCriteria().andCurrentSortEqualTo(currentSort + 1);
+        List<QueueUserinfo> list = queueUserinfoMapper.selectByExample(example);
+        if (CollectionUtils.isNotEmpty(list)) {
+            QueueUserinfo afterUser = list.get(0);
+            afterUser.setCurrentSort(afterUser.getCurrentSort() - 1);
+            afterUser.setGmtUpdate(new Date());
+            currentUser.setCurrentSort(currentSort + 1);
+            currentUser.setGmtUpdate(new Date());
+            ArrayList<Object> users = Lists.newArrayList();
+            users.add(afterUser);
+            users.add(currentUser);
+            queueUserinfoExtMapper.updateByPrimarykeyBatch(users);
+        }
+    }
+
 }

@@ -12,4 +12,6 @@ public interface QueueCoreService {
     void insertQueueUser(QueueUserInsertDTO dto) throws Exception;
 
     void moveUpQueueUser(QueueListDTO dto) throws Exception;
+
+    void moveDownQueueUser(QueueListDTO dto) throws Exception;
 }

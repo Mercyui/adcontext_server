@@ -9,11 +9,10 @@ import com.mercy.utils.ResultDTOWithPagination;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 
 @RestController
@@ -26,6 +25,34 @@ public class QueueController {
     @Autowired
     public void setQueueCoreService(QueueCoreService queueCoreService) {
         this.queueCoreService = queueCoreService;
+    }
+
+    /**
+     * 获取列表查询
+     *
+     * @param dto 参数封装
+     * @return 返回值
+     */
+    @GetMapping(value = "/queueList")
+    public ResultDTOWithPagination<Object> getQueueList(QueueListDTO dto, HttpServletResponse response) {
+        logger.info("QueueApplication.getQueueList params:{}", dto);
+        ResultDTOWithPagination<Object> result =
+                new ResultDTOWithPagination<>(true, null, "查询成功!");
+        try {
+            HashMap<String, Object> resultMap = queueCoreService.getQueueList(dto);
+            result.setData(resultMap.get("data"));
+            result.setPagination((Pagination) resultMap.get("pagination"));
+            response.setHeader("Access-Control-Allow-Origin", "*");
+        } catch (MyOwnerException e) {
+            result.setSuccess(false);
+            result.setMessage(e.getMessage());
+            logger.error("QueueApplication.getQueueList MyOwnerException:", e);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage("查询异常");
+            logger.error("QueueApplication.getQueueList error:", e);
+        }
+        return result;
     }
 
     /**
@@ -58,12 +85,15 @@ public class QueueController {
      * @param dto 参数封装
      * @return 返回值
      */
-    @PutMapping("/queueUser")
-    public ResultDTOWithPagination<Object> moveUpQueueUser(QueueListDTO dto) {
+    @PostMapping("/moveUpQueue")
+    public ResultDTOWithPagination<Object> moveUpQueueUser(QueueListDTO dto, HttpServletRequest request, HttpServletResponse response) {
         logger.info("QueueApplication.moveUpQueueUser params:{}", dto);
-        ResultDTOWithPagination<Object> result = new ResultDTOWithPagination<>(true, null, "插入成功!");
+        ResultDTOWithPagination<Object> result = new ResultDTOWithPagination<>(true, null, "操作成功!");
         try {
             queueCoreService.moveUpQueueUser(dto);
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+            //response.setHeader("Access-Control-Allow-Headers", "Content-Type");
         } catch (MyOwnerException e) {
             result.setSuccess(false);
             result.setMessage(e.getMessage());
@@ -77,28 +107,25 @@ public class QueueController {
     }
 
     /**
-     * 获取列表查询
+     * 队列数据向前移动
      *
      * @param dto 参数封装
      * @return 返回值
      */
-    @GetMapping(value = "/queueList")
-    public ResultDTOWithPagination<Object> getQueueList(QueueListDTO dto) {
-        logger.info("QueueApplication.getQueueList params:{}", dto);
-        ResultDTOWithPagination<Object> result =
-                new ResultDTOWithPagination<>(true, null, "查询成功!");
+    @PostMapping("/moveDownQueue")
+    public ResultDTOWithPagination<Object> moveDownQueueUser(QueueListDTO dto) {
+        logger.info("QueueApplication.moveDownQueueUser params:{}", dto);
+        ResultDTOWithPagination<Object> result = new ResultDTOWithPagination<>(true, null, "操作成功!");
         try {
-            HashMap<String, Object> resultMap = queueCoreService.getQueueList(dto);
-            result.setData(resultMap.get("data"));
-            result.setPagination((Pagination) resultMap.get("pagination"));
+            queueCoreService.moveDownQueueUser(dto);
         } catch (MyOwnerException e) {
             result.setSuccess(false);
             result.setMessage(e.getMessage());
-            logger.error("QueueApplication.getQueueList MyOwnerException:", e);
+            logger.error("QueueApplication.moveDownQueueUser MyOwnerException:", e);
         } catch (Exception e) {
             result.setSuccess(false);
             result.setMessage("查询异常");
-            logger.error("QueueApplication.getQueueList error:", e);
+            logger.error("QueueApplication.moveDownQueueUser error:", e);
         }
         return result;
     }
