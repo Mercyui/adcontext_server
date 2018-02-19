@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 
@@ -86,7 +85,7 @@ public class QueueController {
      * @return 返回值
      */
     @PostMapping("/moveUpQueue")
-    public ResultDTOWithPagination<Object> moveUpQueueUser(QueueListDTO dto, HttpServletRequest request, HttpServletResponse response) {
+    public ResultDTOWithPagination<Object> moveUpQueueUser(QueueListDTO dto, HttpServletResponse response) {
         logger.info("QueueApplication.moveUpQueueUser params:{}", dto);
         ResultDTOWithPagination<Object> result = new ResultDTOWithPagination<>(true, null, "操作成功!");
         try {
