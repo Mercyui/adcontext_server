@@ -1,4 +1,6 @@
-package com.mercy.dto;
+package com.mercy.dto.queue;
+
+import com.mercy.dto.Pagination;
 
 import java.io.Serializable;
 

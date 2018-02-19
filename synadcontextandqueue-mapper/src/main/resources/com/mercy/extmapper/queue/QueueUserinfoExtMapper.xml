@@ -17,6 +17,20 @@
       user_status
     </sql>
 
+    <!--批量更新数据库数据-->
+    <update id="updateByPrimarykeyBatch">
+        update queue_userinfo set gmt_update =now(),
+        <trim prefix="current_sort=case" suffix="end,">
+            <foreach collection="users" item="user">
+                when id=#{item.id} then #{item.currentSort}
+            </foreach>
+        </trim>
+        where id in
+        <foreach collection="users" open="(" close=")" item="user" separator=",">
+            #{user.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+
     <!--查询队列的列表-->
     <select id="selectQueueList" parameterType="map" resultMap="BaseResultMap">
         select * from queue_userinfo a
@@ -31,6 +45,11 @@
     <select id="selectQueueListRecords" parameterType="map" resultType="java.lang.Integer">
         select count(*) from queue_userinfo a
         where a.user_status =#{normal}
+    </select>
+
+    <!--查询队列的最后一名-->
+    <select id="selectMaxQueueUserInfo" parameterType="map" resultMap="BaseResultMap">
+      select max(sort_score),current_sort from queue_userinfo where user_status=#{normal}
     </select>
 
 </mapper>

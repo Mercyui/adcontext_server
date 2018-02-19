@@ -29,8 +29,8 @@
             <version>${project.parent.version}</version>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.apache.commons</groupId>-->
-            <!--<artifactId>commons-io</artifactId>-->
+        <!--<groupId>org.apache.commons</groupId>-->
+        <!--<artifactId>commons-io</artifactId>-->
         <!--</dependency>-->
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -56,10 +56,13 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.googlecode.log4jdbc</groupId>
             <artifactId>log4jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
         </dependency>
 
     </dependencies>
