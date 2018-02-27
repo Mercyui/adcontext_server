@@ -90,9 +90,6 @@ public class QueueController {
         ResultDTOWithPagination<Object> result = new ResultDTOWithPagination<>(true, null, "操作成功!");
         try {
             queueCoreService.moveUpQueueUser(dto);
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-            //response.setHeader("Access-Control-Allow-Headers", "Content-Type");
         } catch (MyOwnerException e) {
             result.setSuccess(false);
             result.setMessage(e.getMessage());
