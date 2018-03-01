@@ -33,7 +33,7 @@ public class QueueController {
      * @return 返回值
      */
     @GetMapping(value = "/queueList")
-    public ResultDTOWithPagination<Object> getQueueList(QueueListDTO dto, HttpServletResponse response) {
+    public ResultDTOWithPagination<Object> getQueueList(QueueListDTO dto) {
         logger.info("QueueApplication.getQueueList params:{}", dto);
         ResultDTOWithPagination<Object> result =
                 new ResultDTOWithPagination<>(true, null, "查询成功!");
@@ -41,7 +41,6 @@ public class QueueController {
             HashMap<String, Object> resultMap = queueCoreService.getQueueList(dto);
             result.setData(resultMap.get("data"));
             result.setPagination((Pagination) resultMap.get("pagination"));
-            response.setHeader("Access-Control-Allow-Origin", "*");
         } catch (MyOwnerException e) {
             result.setSuccess(false);
             result.setMessage(e.getMessage());
@@ -85,7 +84,7 @@ public class QueueController {
      * @return 返回值
      */
     @PostMapping("/moveUpQueue")
-    public ResultDTOWithPagination<Object> moveUpQueueUser(QueueListDTO dto, HttpServletResponse response) {
+    public ResultDTOWithPagination<Object> moveUpQueueUser(@RequestBody QueueListDTO dto) {
         logger.info("QueueApplication.moveUpQueueUser params:{}", dto);
         ResultDTOWithPagination<Object> result = new ResultDTOWithPagination<>(true, null, "操作成功!");
         try {
@@ -109,7 +108,7 @@ public class QueueController {
      * @return 返回值
      */
     @PostMapping("/moveDownQueue")
-    public ResultDTOWithPagination<Object> moveDownQueueUser(QueueListDTO dto) {
+    public ResultDTOWithPagination<Object> moveDownQueueUser(@RequestBody QueueListDTO dto) {
         logger.info("QueueApplication.moveDownQueueUser params:{}", dto);
         ResultDTOWithPagination<Object> result = new ResultDTOWithPagination<>(true, null, "操作成功!");
         try {

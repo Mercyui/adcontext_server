@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.*;
 
@@ -101,7 +102,7 @@ public class QueueCoreServiceImpl implements QueueCoreService {
      * @throws Exception 异常
      */
     @Override
-    public void moveUpQueueUser(QueueListDTO dto) throws Exception {
+    public void moveUpQueueUser(@RequestBody QueueListDTO dto) throws Exception {
         logger.info("QueueCoreServiceImpl.moveUpQueueUser params:{}", JSONObject.toJSONString(dto));
         if (Objects.equals(dto, null))
             throw new MyOwnerException("传入参数不能为空!");
@@ -137,7 +138,7 @@ public class QueueCoreServiceImpl implements QueueCoreService {
      * @throws Exception 异常
      */
     @Override
-    public void moveDownQueueUser(QueueListDTO dto) throws Exception {
+    public void moveDownQueueUser(@RequestBody QueueListDTO dto) throws Exception {
         logger.info("QueueCoreServiceImpl.moveDownQueueUser params:{}", JSONObject.toJSONString(dto));
         if (Objects.equals(dto, null))
             throw new MyOwnerException("传入参数不能为空!");

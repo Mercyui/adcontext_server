@@ -20,9 +20,9 @@
     <!--批量更新数据库数据-->
     <update id="updateByPrimarykeyBatch">
         update queue_userinfo set gmt_update =now(),
-        <trim prefix="current_sort=case" suffix="end,">
-            <foreach collection="users" item="user">
-                when id=#{item.id} then #{item.currentSort}
+        <trim prefix="current_sort=case" suffix="end">
+            <foreach collection="list" item="user">
+                when id=#{user.id,jdbcType=BIGINT} then #{user.currentSort,jdbcType=INTEGER}
             </foreach>
         </trim>
         where id in
