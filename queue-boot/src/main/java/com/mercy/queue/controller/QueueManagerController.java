@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping(value = "/queue")
-public class QueueController {
+public class QueueManagerController {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private QueueCoreService queueCoreService;
@@ -53,29 +53,29 @@ public class QueueController {
         return result;
     }
 
-    /**
-     * 新增队列成员
-     *
-     * @param dto 参数封装
-     * @return 返回值
-     */
-    @PutMapping("/queueUser")
-    public ResultDTOWithPagination<Object> insertQueueUser(QueueUserInsertDTO dto) {
-        logger.info("QueueApplication.insertQueueUser params:{}", dto);
-        ResultDTOWithPagination<Object> result = new ResultDTOWithPagination<>(true, null, "插入成功!");
-        try {
-            queueCoreService.insertQueueUser(dto);
-        } catch (MyOwnerException e) {
-            result.setSuccess(false);
-            result.setMessage(e.getMessage());
-            logger.error("QueueApplication.insertQueueUser MyOwnerException:", e);
-        } catch (Exception e) {
-            result.setSuccess(false);
-            result.setMessage("查询异常");
-            logger.error("QueueApplication.insertQueueUser error:", e);
-        }
-        return result;
-    }
+    ///**
+    // * 新增队列成员
+    // *
+    // * @param dto 参数封装
+    // * @return 返回值
+    // */
+    //@PutMapping("/queueUser")
+    //public ResultDTOWithPagination<Object> insertQueueUser(QueueUserInsertDTO dto) {
+    //    logger.info("QueueApplication.insertQueueUser params:{}", dto);
+    //    ResultDTOWithPagination<Object> result = new ResultDTOWithPagination<>(true, null, "插入成功!");
+    //    try {
+    //        queueCoreService.insertQueueUser(dto);
+    //    } catch (MyOwnerException e) {
+    //        result.setSuccess(false);
+    //        result.setMessage(e.getMessage());
+    //        logger.error("QueueApplication.insertQueueUser MyOwnerException:", e);
+    //    } catch (Exception e) {
+    //        result.setSuccess(false);
+    //        result.setMessage("查询异常");
+    //        logger.error("QueueApplication.insertQueueUser error:", e);
+    //    }
+    //    return result;
+    //}
 
     /**
      * 队列数据向前移动
